@@ -10,13 +10,13 @@ import {
   UseGuards,
 } from '@nestjs/common'
 import { BaseController } from '../../../common/base'
-import { ParamIdDto } from '../../../common/dto/params-id.dto'
 import { PaginacionQueryDto } from '../../../common/dto/paginacion-query.dto'
 import { Request } from 'express'
 import { HorarioService } from '../service/horario.service'
 import { JwtAuthGuard } from 'src/core/authentication/guards/jwt-auth.guard'
 import { CasbinGuard } from 'src/core/authorization/guards/casbin.guard'
 import { CrearHorarioDto } from '../dto/horario.dto'
+import { ParamUuidDto } from 'src/common/dto/params-uuid.dto'
 
 @UseGuards(JwtAuthGuard, CasbinGuard)
 @Controller('horario')
@@ -46,7 +46,7 @@ export class HorarioController extends BaseController {
 
   @Patch(':id')
   async actualizar(
-    @Param() params: ParamIdDto,
+    @Param() params: ParamUuidDto,
     @Req() req: Request,
     @Body() rolDto: CrearHorarioDto
   ) {
@@ -61,7 +61,7 @@ export class HorarioController extends BaseController {
   }
 
   @Patch('/:id/activacion')
-  async activar(@Req() req: Request, @Param() params: ParamIdDto) {
+  async activar(@Req() req: Request, @Param() params: ParamUuidDto) {
     const { id: idRol } = params
     const usuarioAuditoria = this.getUser(req)
     const result = await this.horarioServicio.activar(idRol, usuarioAuditoria)
@@ -69,7 +69,7 @@ export class HorarioController extends BaseController {
   }
 
   @Patch('/:id/inactivacion')
-  async inactivar(@Req() req: Request, @Param() params: ParamIdDto) {
+  async inactivar(@Req() req: Request, @Param() params: ParamUuidDto) {
     const { id: idRol } = params
     const usuarioAuditoria = this.getUser(req)
     const result = await this.horarioServicio.inactivar(idRol, usuarioAuditoria)

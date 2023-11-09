@@ -36,6 +36,9 @@ export class insertCasbinRules1617712857472 implements MigrationInterface {
       '/admin/roles': {
         [RolEnum.ADMINISTRADOR]: 'read|create|update|delete',
       },
+      '/encargado/horarios': {
+        [RolEnum.ENCARGADO]: 'read|create|update|delete',
+      },
     }
 
     const backendRoutes: CasbinValue = {
@@ -137,6 +140,27 @@ export class insertCasbinRules1617712857472 implements MigrationInterface {
 
       '/api/usuarios/cuenta/contrasena': {
         [RolEnum.TODOS]: 'PATCH',
+      },
+
+      // ASISTENCIA
+
+      '/api/horario': {
+        [RolEnum.ENCARGADO]: 'GET|POST',
+      },
+
+      '/api/horario/todos': {
+        [RolEnum.ENCARGADO]: 'GET|POST',
+      },
+      '/api/horario/:id': {
+        [RolEnum.ENCARGADO]: 'PATCH',
+      },
+
+      '/api/horario/:id/activacion': {
+        [RolEnum.ENCARGADO]: 'PATCH',
+      },
+
+      '/api/horario/:id/inactivacion': {
+        [RolEnum.ENCARGADO]: 'PATCH',
       },
     }
 

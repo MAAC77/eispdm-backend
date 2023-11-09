@@ -104,6 +104,28 @@ export class modulo1611497480901 implements MigrationInterface {
           },
         ],
       },
+      // MENU SECCION ASISTENCIA
+      {
+        nombre: 'asistencias',
+        url: '/asistencias',
+        label: 'Asistencia',
+        propiedades: {
+          descripcion: 'Sección de asistencia',
+          orden: 3,
+        },
+        subMenus: [
+          {
+            nombre: 'horario',
+            url: '/encargado/horarios',
+            label: 'Horarios',
+            propiedades: {
+              icono: 'manage_accounts',
+              descripcion: 'Administración de horario',
+              orden: 1,
+            },
+          },
+        ],
+      },
     ]
 
     for (const item of items) {

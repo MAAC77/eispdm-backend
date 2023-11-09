@@ -31,7 +31,12 @@ export class HorarioRepository {
     const query = this.dataSource
       .getRepository(Horario)
       .createQueryBuilder('horario')
-      .select(['horario.id', 'horario.nombre', 'horario.estado'])
+      .select([
+        'horario.id',
+        'horario.nombre',
+        'horario.descripcion',
+        'horario.estado',
+      ])
       .take(limite)
       .skip(saltar)
 
