@@ -4,10 +4,13 @@ import { Injectable } from '@nestjs/common'
 import { Horario } from '../entity/horario.entity'
 import { CrearHorarioDto } from '../dto/horario.dto'
 import { PaginacionQueryDto } from 'src/common/dto/paginacion-query.dto'
+import { BaseRepository } from 'src/common/base/base-repository'
 
 @Injectable()
-export class HorarioRepository {
-  constructor(private dataSource: DataSource) {}
+export class HorarioRepository extends BaseRepository<Horario> {
+  constructor(protected dataSource: DataSource) {
+    super(HorarioRepository.name, dataSource, Horario)
+  }
 
   async buscarPorId(id: string) {
     return await this.dataSource

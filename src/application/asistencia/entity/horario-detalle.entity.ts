@@ -43,19 +43,19 @@ export class HorarioDetalle extends AuditoriaEntity {
   salidaMinima: string
 
   @Column({ type: 'boolean', comment: 'Aplica lunes' })
-  lunes: string
+  lunes: boolean
 
   @Column({ type: 'boolean', comment: 'Aplica martes' })
-  martes: string
+  martes: boolean
 
   @Column({ type: 'boolean', comment: 'Aplica miercoles' })
-  miercoles: string
+  miercoles: boolean
 
   @Column({ type: 'boolean', comment: 'Aplica jueves' })
-  jueves: string
+  jueves: boolean
 
   @Column({ type: 'boolean', comment: 'Aplica viernes' })
-  viernes: string
+  viernes: boolean
 
   @Column({
     name: 'id_horario',

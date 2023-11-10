@@ -7,10 +7,11 @@ import { Horario } from './entity/horario.entity'
 import { HorarioUsuario } from './entity/horario-usuario.entity'
 import { HorarioDetalle } from './entity/horario-detalle.entity'
 import { Marcacion } from './entity/marcacion.entity'
+import { HorarioDetalleRepository } from './repository/horario-detalle.repository'
 
 @Module({
   controllers: [HorarioController],
-  providers: [HorarioService, HorarioRepository],
+  providers: [HorarioService, HorarioRepository, HorarioDetalleRepository],
   imports: [
     TypeOrmModule.forFeature([
       Horario,

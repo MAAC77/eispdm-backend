@@ -15,7 +15,7 @@ import { Request } from 'express'
 import { HorarioService } from '../service/horario.service'
 import { JwtAuthGuard } from 'src/core/authentication/guards/jwt-auth.guard'
 import { CasbinGuard } from 'src/core/authorization/guards/casbin.guard'
-import { CrearHorarioDto } from '../dto/horario.dto'
+import { CrearHorarioDetalleDto, CrearHorarioDto } from '../dto/horario.dto'
 import { ParamUuidDto } from 'src/common/dto/params-uuid.dto'
 
 @UseGuards(JwtAuthGuard, CasbinGuard)
@@ -41,6 +41,25 @@ export class HorarioController extends BaseController {
   async crear(@Req() req: Request, @Body() rolDto: CrearHorarioDto) {
     const usuarioAuditoria = this.getUser(req)
     const result = await this.horarioServicio.crear(rolDto, usuarioAuditoria)
+    return this.successCreate(result)
+  }
+
+  @Get('/:id/lista')
+  async listarDetalleHoraio(@Param() params: ParamUuidDto) {
+    const result = await this.horarioServicio.listarDetalleHorario(params.id)
+    return this.successList(result)
+  }
+
+  @Post('/detalle')
+  async crearDetalle(
+    @Req() req: Request,
+    @Body() detalleDto: CrearHorarioDetalleDto
+  ) {
+    const usuarioAuditoria = this.getUser(req)
+    const result = await this.horarioServicio.crearDetalle(
+      detalleDto,
+      usuarioAuditoria
+    )
     return this.successCreate(result)
   }
 
