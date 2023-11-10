@@ -11,9 +11,9 @@ export class usuarioRol1611516017924 implements MigrationInterface {
         usuario: '1', //TextService.textToUuid('ADMINISTRADOR'),
       },
       {
-        id: '2',
-        rol: '1', // TextService.textToUuid(RolEnum.ADMINISTRADOR),
-        usuario: '2', // TextService.textToUuid('ADMINISTRADOR-TECNICO'),
+        id: '1',
+        rol: '2', //TextService.textToUuid(RolEnum.ADMINISTRADOR),
+        usuario: '1', //TextService.textToUuid('ADMINISTRADOR'),
       },
       {
         id: '3',
@@ -22,7 +22,7 @@ export class usuarioRol1611516017924 implements MigrationInterface {
       },
       {
         id: '4',
-        rol: '2', //TextService.textToUuid(RolEnum.TECNICO),
+        rol: '3', //TextService.textToUuid(RolEnum.TECNICO),
         usuario: '3', // TextService.textToUuid('TECNICO'),
       },
     ]

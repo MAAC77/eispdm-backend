@@ -83,19 +83,11 @@ export class UsuarioService extends BaseService {
       throw new PreconditionFailedException(Messages.EXISTING_EMAIL)
     }
 
-    // Constrastación SEGIP
-    const { persona, roles } = usuarioDto
-    const contrastaSegip = await this.segipServices.contrastar(persona)
+    const { roles } = usuarioDto
 
-    if (!contrastaSegip?.finalizado) {
-      throw new PreconditionFailedException(contrastaSegip?.mensaje)
-    }
-
-    const contrasena = TextService.generateShortRandomText()
-    const datosCorreo = {
-      correo: usuarioDto.correoElectronico,
-      asunto: Messages.SUBJECT_EMAIL_ACCOUNT_ACTIVE,
-    }
+    const contrasena = `${usuarioDto.persona.nroDocumento}`
+    console.log('='.repeat(80))
+    console.log(contrasena)
 
     const op = async (transaction: EntityManager) => {
       usuarioDto.contrasena = await TextService.encrypt(contrasena)
@@ -128,15 +120,6 @@ export class UsuarioService extends BaseService {
     }
 
     const crearResult = await this.usuarioRepositorio.runTransaction(op)
-
-    await this.enviarCorreoContrasenia(
-      datosCorreo,
-      usuarioDto.persona.nroDocumento,
-      contrasena
-    ).catch((error) => {
-      const mensaje = `Falló al enviar la contraseña del usuario por correo electrónico`
-      this.logger.error(error, mensaje)
-    })
 
     return crearResult
   }

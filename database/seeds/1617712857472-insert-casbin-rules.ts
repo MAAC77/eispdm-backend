@@ -162,6 +162,12 @@ export class insertCasbinRules1617712857472 implements MigrationInterface {
       '/api/horario/:id/inactivacion': {
         [RolEnum.ENCARGADO]: 'PATCH',
       },
+      '/api/horario/:id/lista': {
+        [RolEnum.ENCARGADO]: 'GET',
+      },
+      '/api/horario/detalle': {
+        [RolEnum.ENCARGADO]: 'POST',
+      },
     }
 
     const registrarCasbin = async (

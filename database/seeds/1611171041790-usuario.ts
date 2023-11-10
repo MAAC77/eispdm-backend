@@ -11,35 +11,33 @@ import { Persona } from '../../src/core/usuario/entity/persona.entity'
 
 export class usuario1611171041790 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    const DEFAULT_PASS = '123'
-    const pass = await TextService.encrypt(DEFAULT_PASS)
     const items = [
       {
         //id: 1,
-        usuario: '9270815',
-        correoElectonico: '9270815@yopmail.com',
+        usuario: '6995369',
+        correoElectonico: '6995369@yopmail.com',
         persona: {
-          nombres: 'YASMIN',
-          primerApellido: 'RODRIGUEZ',
-          segundoApellido: 'ROMERO',
+          nombres: 'CRISTHIAN',
+          primerApellido: 'MAMANI',
+          segundoApellido: 'CHURA',
           tipoDocumento: TipoDocumento.CI,
-          nroDocumento: '9270815',
-          fechaNacimiento: '2001-12-16',
-          genero: Genero.FEMENINO,
+          nroDocumento: '6995369',
+          fechaNacimiento: '1990-12-12',
+          genero: Genero.MASCULINO,
         },
       },
       {
         //id: 2,
-        usuario: '1765251',
+        usuario: '3394967',
         correoElectonico: '1765251@yopmail.com',
         persona: {
-          nombres: 'ALBANO',
-          primerApellido: 'ROJAS',
-          segundoApellido: 'AGUADA',
+          nombres: ' MARITZA ISABEL',
+          primerApellido: 'GISBERT',
+          segundoApellido: 'MONZON',
           tipoDocumento: TipoDocumento.CI,
-          nroDocumento: '1765251',
-          fechaNacimiento: '1967-05-28',
-          genero: Genero.MASCULINO,
+          nroDocumento: '3394967',
+          fechaNacimiento: '1990-12-12',
+          genero: Genero.FEMENINO,
         },
       },
       {
@@ -77,7 +75,7 @@ export class usuario1611171041790 implements MigrationInterface {
       const personaResult = await queryRunner.manager.save(persona)
       const usuario = new Usuario({
         ciudadaniaDigital: false,
-        contrasena: pass,
+        contrasena: await TextService.encrypt(item.usuario),
         intentos: 0,
         usuario: item.usuario,
         correoElectronico: item.correoElectonico,
