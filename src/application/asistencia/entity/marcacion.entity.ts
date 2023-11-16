@@ -4,14 +4,11 @@ import {
   Check,
   Column,
   Entity,
-  JoinColumn,
-  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm'
 import dotenv from 'dotenv'
 import { AuditoriaEntity } from '../../../common/entity/auditoria.entity'
 import { EstadoRegistro } from '../../../common/constants'
-import { Usuario } from 'src/core/usuario/entity/usuario.entity'
 
 dotenv.config()
 
@@ -25,28 +22,29 @@ export class Marcacion extends AuditoriaEntity {
   })
   id: string
 
-  @Column({ type: 'varchar', comment: 'Hora Marcacion' })
-  hora: string
-
-  @Column({ type: 'varchar', comment: 'fecha Marcacion' })
-  fecha: string
-
-  @Column({ type: 'varchar', comment: 'Dispositivo Marcacion' })
-  dispositivo: string
+  @Column({
+    name: 'id_registro',
+    type: 'varchar',
+    comment: 'Id usaurio en el dispositivo',
+  })
+  idRegistro: string
 
   @Column({
-    name: 'id_usuario',
-    type: 'bigint',
-    nullable: false,
-    comment: 'Clave foránea que referencia la tabla usuarios',
+    name: 'id_usuario_dispositivo',
+    type: 'varchar',
+    comment: 'Id usaurio en el dispositivo',
   })
-  idUsuario: string
+  idUsuarioDispositivo: string
 
-  @ManyToOne(() => Usuario, (usuario) => usuario.usuarioMarcacion, {
-    nullable: false,
+  @Column({ type: 'varchar', comment: 'fecha Marcacion' })
+  fecha: Date
+
+  @Column({
+    name: 'ip_dispositivo',
+    type: 'varchar',
+    comment: 'Dispositivo Marcacion',
   })
-  @JoinColumn({ name: 'id_usuario', referencedColumnName: 'id' })
-  usuario: Usuario
+  ipDispositivo: string
 
   constructor(data?: Partial<Marcacion>) {
     super(data)
